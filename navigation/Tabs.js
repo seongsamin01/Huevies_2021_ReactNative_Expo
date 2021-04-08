@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Movies from "../screens/Movies";
 import Tv from "../screens/Tv";
@@ -12,8 +12,9 @@ const getHeaderName = route =>
 
 export default ({ navigation, route }) => {
     useLayoutEffect(() => {
+        const name = getHeaderName(route);
         navigation.setOptions({
-          title: getHeaderName(route)
+            title: name
         });
     }, [route]);
     return (

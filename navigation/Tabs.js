@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import Movies from "../screens/Movies";
+import Movies from "../screens/Movies/MoviesContainer";
 import Tv from "../screens/Tv";
 import Search from "../screens/Search";
 import Favs from "../screens/Favs";
@@ -30,7 +30,7 @@ export default ({ navigation, route }) => {
                         iconName += "tv";
                     } else if(route.name === "Search"){
                         iconName += "search";
-                    }else if(route.name === "Favorites"){
+                    }else if(route.name === "Discovery"){
                         iconName += "heart";
                     }
                     return (
@@ -53,7 +53,7 @@ export default ({ navigation, route }) => {
             <Tabs.Screen name = "Movies" component={Movies} />
             <Tabs.Screen name = "Tv" component={Tv} />
             <Tabs.Screen name = "Search" component={Search} />
-            <Tabs.Screen name = "Favorites" component={Favs} />
+            <Tabs.Screen name = "Discovery" component={Favs} />
         </Tabs.Navigator>
     );
 };

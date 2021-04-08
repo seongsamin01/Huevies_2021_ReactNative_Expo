@@ -46,7 +46,7 @@ export default ({ navigation, route }) => {
                 showLabel: false,
                 style: {
                     backgroundColor: "black",
-                    borderTopColof: "black"
+                    borderTopColor: "black"
                 }
             }}
         >

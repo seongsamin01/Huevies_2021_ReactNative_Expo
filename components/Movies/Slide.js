@@ -1,16 +1,17 @@
 import React from "react";
-import styled from  "styled-components/native";
-import PropTypes from "prop-types";
+import styled from "styled-components/native";
 import { apiImage } from "../../api";
 import Poster from "../Poster";
-import { TouchableOpacity } from "react-native";
+import PropTypes from "prop-types";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 const Container = styled.View`
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
 `;
 
-const BG =  styled.Image`
+const BG = styled.Image`
     height: 100%;
     width: 100%;
     opacity: 0.4;
@@ -39,6 +40,7 @@ const Title = styled.Text`
 const Votes = styled.Text`
     color: rgb(220, 220, 220);
     margin-bottom: 7px;
+    font-weight: 500;
     font-size: 12px;
 `;
 
@@ -51,7 +53,7 @@ const Overview = styled.Text`
 const Button = styled.View`
     margin-top: 10px;
     background-color: #e74c3c;
-    padding: 10px;
+    padding: 7px 10px;
     border-radius: 3px;
 `;
 
@@ -61,18 +63,18 @@ const ButtonText = styled.Text`
 
 const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => (
     <Container>
-        <BG source={{ uri: apiImage(backgroundImage) }} />
+        <BG source={{ uri: apiImage(backgroundImage)}} />
         <Content>
-              <Poster url={apiImage(poster)} />
+            <Poster url={apiImage(poster)} />
             <Data>
-                <Title>{title.slice(0, 30)}</Title>
+                <Title>{title.length > 40 ? `${title.slice(0,40)}...` : title}</Title>
                 <Votes>⭐️ {votes} / 10</Votes>
-                <Overview>{overview.slice(0, 120)}</Overview>
+                <Overview>{overview.slice(0, 110)}...</Overview>
                 <TouchableOpacity>
                     <Button>
-                        <ButtonText>View details</ButtonText>
+                        <ButtonText>View Details</ButtonText>
                     </Button>
-                </TouchableOpacity>    
+                </TouchableOpacity>
             </Data>
         </Content>
     </Container>
@@ -80,7 +82,7 @@ const Slide = ({ id, title, backgroundImage, votes, overview, poster }) => (
 
 Slide.propTypes = {
     id: PropTypes.number.isRequired,
-    title: PropTypes.string.isRequires,
+    title: PropTypes.string.isRequired,
     backgroundImage: PropTypes.string.isRequired,
     votes: PropTypes.number.isRequired,
     overview: PropTypes.string.isRequired

@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-web-swiper";
-import { ActivityIndicator, ScrollView, Dimensions } from "react-native";
+import { ScrollView, Dimensions } from "react-native";
 import Slide from "../../components/Movies/Slide";
 import Title from "../../components/Title";
 import Vertical from "../../components/Vertical";
 import Horizontal from "../../components/Horizontal";
+import ScrollContainer from "../../components/ScrollContainer";
 
 const { width: WIDTH, height: HEIGHT} = Dimensions.get("window");
 
@@ -21,17 +22,8 @@ const UpcomingContainer = styled.View`
 `;
 
 export default ({ loading, nowPlaying, popular, upcoming }) => (
-    <ScrollView
-        style={{ backgroundColor: "black" }}
-        contentContainerStyle={{
-            flex: loading ? 1 : 0,
-            justifyContent: loading ? "center" : "flex-start"
-        }}
-    >
-        {loading ? (
-            <ActivityIndicator color="white" size="small" />
-        ) : (
-            <>
+    <ScrollContainer loading={loading}>
+        <>
                 <SliderContainer>
                     <Swiper controlsEnabled={false} loop timeout={3}>
                         {nowPlaying.map(movie => (
@@ -79,7 +71,6 @@ export default ({ loading, nowPlaying, popular, upcoming }) => (
                     ))}
                     </UpcomingContainer>
                 </Container>
-            </>    
-        )}
-    </ScrollView>            
+            </>
+    </ScrollContainer>
 );

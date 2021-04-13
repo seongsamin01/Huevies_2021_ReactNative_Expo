@@ -6,6 +6,7 @@ import Poster from "./Poster";
 import Votes from "./Votes";
 import { apiImage } from "../api";
 import { formatDate, trimText } from "../utils";
+import { useNavigation } from '@react-navigation/native';
 
 const Container = styled.View`
     padding: 0px 30px ;
@@ -36,18 +37,30 @@ const Overview = styled.Text`
     color: white;
 `;
 
-const Horizontal = ({id, title, poster, overview, releaseDate }) => (
-    <TouchableOpacity>
-        <Container>
-            <Poster url={poster} />
-            <Data>
-                <Title>{trimText(title, 30)}</Title>
-                {releaseDate ? <ReleaseDate>{formatDate(releaseDate)}</ReleaseDate> : null}
-                <Overview>{trimText(overview, 130)}</Overview>
-            </Data>
-        </Container>
-    </TouchableOpacity>
-);
+const Horizontal = ({id, title, poster, overview, releaseDate }) => {
+    const navigation = useNavigation();
+    const goToDetail = () => {
+        navigation.navigate("Detail", {
+            id,
+            title,
+            poster,
+            overview,
+            releaseDate
+        });
+    };
+    return  (
+        <TouchableOpacity onPress={goToDetail}>
+            <Container>
+                <Poster url={poster} />
+                <Data>
+                    <Title>{trimText(title, 30)}</Title>
+                    {releaseDate ? <ReleaseDate>{formatDate(releaseDate)}</ReleaseDate> : null}
+                    <Overview>{trimText(overview, 130)}</Overview>
+                </Data>
+            </Container>
+        </TouchableOpacity>
+    );
+};
 
 Horizontal.propTypes ={
     id: PropTypes.number.isRequired,

@@ -1,10 +1,10 @@
 import React from "react";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
-import { apiImage } from "../api";
-import Poster from "../components/Poster";
-import ScrollContainer from "../components/ScrollContainer";
-import Votes from "../components/Votes";
+import { apiImage } from "../../api";
+import ScrollContainer from "../../components/ScrollContainer";
+import Poster from "../../components/Poster";
+import Votes from "../../components/Votes";
 
 const BG = styled.Image`
     width: 100%;
@@ -56,14 +56,7 @@ const DataValue = styled.Text`
 `;
 
 
-export default ({
-    navigation, 
-    route: {
-        params: { id, title, backgroundImage, poster, votes, overview }
-    } 
-}) => {
-    navigation.setOptions({ title });
-    return (
+export default ({ backgroundImage, title, votes, overview, poster }) => (
         <ScrollContainer loading={false}>
         <>
           <Header>
@@ -87,4 +80,3 @@ export default ({
         </>  
         </ScrollContainer>
     );  
-};

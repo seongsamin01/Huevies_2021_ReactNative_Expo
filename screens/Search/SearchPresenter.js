@@ -6,12 +6,10 @@ import Horizontal from "../../components/Horizontal";
 import Vertical from "../../components/Vertical";
 import ScrollContainer from "../../components/ScrollContainer";
 
-const Container = styled.ScrollView`
-    background-color: black;
-`;
-
 export default ({ movies, shows, keyword, onChange, onSubmit }) => (
-    <ScrollContainer 
+    <ScrollContainer
+        refreshFn={onSubmit}
+        loading={false} 
         contentContainerStyle={{
             paddingTop: 10
         }}

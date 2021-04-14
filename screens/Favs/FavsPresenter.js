@@ -26,19 +26,36 @@ const styles = {
 
 export default ({ results }) => {
     const [topIndex, setTopIndex] = useState(0);
+    const nextCard = () => setTopIndex(currentValue => currentValue + 1);
     const position = new Animated.ValueXY()
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: (evt, { dx, dy })=> {
             position.setValue({ x: dx, y: dy });
         },
-        onPanResponderRelease: () => {
-            Animated.spring(position, {
-                toValue: {
-                    x: 0,
-                    y: 0,
-                }
-            }).start();
+        onPanResponderRelease: (evt, { dx, dy }) => {
+            if (dx >= 250) {
+               Animated.spring(position, {
+                    toValue: {
+                        x: WIDTH + 100,
+                        y: dy
+                    }
+                }).start(nextCard);     
+            } else if (dx <= -250) {
+               Animated.spring(position, {
+                    toValue: {
+                        x: -WIDTH - 100,
+                        y: dy
+                    }
+               }).start(nextCard);                 
+            } else {
+                Animated.spring(position, {
+                    toValue: {
+                        x: 0,
+                        y: 0
+                    }
+                }).start();
+            }
         }
     });
     const rotationValues = position.x.interpolate({
@@ -60,6 +77,8 @@ export default ({ results }) => {
         <Container>
             {results.map((result, index) => {
                 if (index === topIndex) {
+                    return null;
+                } else if (index === topIndex) {
                     return (
                         <Animated.View
                         style={{ 

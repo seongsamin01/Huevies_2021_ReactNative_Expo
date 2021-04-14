@@ -141,6 +141,8 @@ export default ({ openBrowser ,result, loading }) => (
                </>  
             )}
             {result.imdb_id && (
+                <>
+                <DataName>Links</DataName>
                 <Link
                     text={"IMDB Page"}
                     icon={"imdb"} 
@@ -148,8 +150,24 @@ export default ({ openBrowser ,result, loading }) => (
                     openBrowser(`https://www.imdb.com/title/${result.imdb_id}`)
                 }
             />
+            </>
         )}
-            </Data>  
+        {result.videos.results?.length > 0 && (
+        <>
+            <DataName>Videos</DataName>
+            {result.videos.results.map(video => (
+                <Link 
+                text={video.name} 
+                key={video.id}
+                icon="youtube-play" 
+                onPress={() => 
+                    openBrowser(`https://www.youtube.com/watch?v=${video.key}`)
+                }  
+            />
+            ))}
+        </>
+        )}
+        </Data>  
         </>  
         </ScrollContainer>
     );  
